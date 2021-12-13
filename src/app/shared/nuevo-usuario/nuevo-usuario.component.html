@@ -1,0 +1,82 @@
+<h3>Nuevo usuario</h3>
+<p>Por favor, rellene los campos obligatorios para crear un nuevo usuario</p>
+<form [formGroup]="newUserForm" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <label for="firstname">Nombre*</label>
+      <input
+        type="text"
+        formControlName="firstname"
+        class="form-control"
+        placeholder="Nombre"
+        autocomplete="false"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="lastname">Apellidos*</label>
+      <input
+        type="text"
+        formControlName="lastname"
+        class="form-control"
+        placeholder="Apellidos"
+        autocomplete="off"
+      />
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <label for="username">Username*</label>
+      <input
+        type="text"
+        formControlName="username"
+        class="form-control"
+        placeholder="Username"
+        autocomplete="off"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="email">E-mail*</label>
+      <input
+        type="email"
+        formControlName="email"
+        class="form-control"
+        placeholder="E-mail"
+        autocomplete="off"
+      />
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <label for="birthday">Birthday</label>
+      <input
+        type="text"
+        formControlName="birthday"
+        class="form-control"
+        placeholder="Birthday"
+        autocomplete="off"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="password">Password*</label>
+      <input
+        type="password"
+        formControlName="password"
+        class="form-control"
+        placeholder="Password"
+        autocomplete="off"
+      />
+    </div>
+  </div>
+  <div class="row mt-5 mb-5">
+    <div class="col-md-12 text-center">
+      <button
+        [disabled]="!newUserForm.valid"
+        type="submit"
+        class="btn btn-primary"
+        name="send"
+      >
+        Enviar
+      </button>
+    </div>
+  </div>
+</form>

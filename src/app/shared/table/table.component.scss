@@ -1,0 +1,33 @@
+.ngx-datatable.material {
+
+    &.single-selection {
+        cursor:pointer;
+      .datatable-body-row {
+        &.active,
+        &.active .datatable-row-group {
+          background-color: rgb(224, 224, 224) !important;
+          color: #ffffff !important;
+        }
+  
+        &.active:hover,
+        &.active:hover .datatable-row-group {
+            background-color: rgb(172, 172, 172) !important;
+            color: #ffffff !important;
+        }
+  
+        &.active:focus,
+        &.active:focus .datatable-row-group {
+            background-color: rgb(136, 136, 136) !important;
+            color: #ffffff !important;
+        }
+      }
+    }
+  
+}
+
+
+@media (min-width: 1200px){
+  .modal-xl {
+      max-width: 1640px;
+  }
+}

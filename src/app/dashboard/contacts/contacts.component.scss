@@ -1,0 +1,16 @@
+.btn_more{
+
+    display: flex !important;
+    align-items: center !important;
+    padding:0 !important;
+    height:25px !important;
+.mat-icon{margin-right:7px !important}
+
+}
+.btn_more:active{
+    outline: 0px !important;box-shadow: none !important;
+    color:grey;
+}
+.btn_more:focus{
+    outline: 0px !important;box-shadow: none !important;
+}

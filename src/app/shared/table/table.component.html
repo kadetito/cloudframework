@@ -1,0 +1,75 @@
+<div>
+  <div class="d-flex justify-content-between mt-3 mb-3">
+    <div>
+      <button
+        type="button"
+        (click)="openModal(template, 'nou')"
+        class="btn btn_more"
+      >
+        <mat-icon mat-list-icon>control_point</mat-icon> Nuevo registro
+      </button>
+    </div>
+    <div>
+      <input
+        type="text"
+        style="padding: 8px"
+        placeholder="Filtrar por palabra clave"
+        (keyup)="updateFilter($event)"
+      />
+    </div>
+  </div>
+  <ngx-datatable
+    #table
+    class="material"
+    [rows]="rows"
+    [columns]="columns"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    rowHeight="auto"
+    [columnMode]="columnMode"
+    [selected]="selected"
+    [selectionType]="SelectionType.single"
+    (select)="onSelect()"
+    (activate)="onActivate()"
+  >
+    <ng-template #template data-backdrop="static" data-keyboard="false">
+      <div>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">
+            <span *ngIf="edit"
+              >{{ identificador.firstname }} {{ identificador.lastname }}</span
+            >
+          </h4>
+          <button
+            type="button"
+            class="close pull-right"
+            aria-label="Close"
+            (click)="close(template)"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <span *ngIf="edit">
+            <div *ngIf="href === 'users'">
+              <app-edit-usuario [iden]="identificador.id"></app-edit-usuario>
+            </div>
+            <div *ngIf="href === 'contacts'">
+              <app-edit-contacto [iden]="identificador.id"></app-edit-contacto>
+            </div>
+          </span>
+          <span *ngIf="!edit">
+            <div *ngIf="href === 'users'">
+              <app-nuevo-usuario></app-nuevo-usuario>
+            </div>
+            <div *ngIf="href === 'contacts'">
+              <app-nuevo-contacto></app-nuevo-contacto>
+            </div>
+          </span>
+        </div>
+      </div>
+    </ng-template>
+  </ngx-datatable>
+</div>
+
+<!-- <div *ngIf="loading">cargando</div> -->

@@ -1,0 +1,31 @@
+<mat-nav-list>
+  <mat-list-item>
+    <mat-icon
+      mat-list-icon
+      class="chevron-button sidenav-button"
+      (click)="isExpanded = !isExpanded"
+      [ngClass]="{ rotated: isExpanded }"
+      >chevron_right</mat-icon
+    >
+  </mat-list-item>
+
+  <mat-list-item [routerLink]="'/'">
+    <mat-icon mat-list-icon>home</mat-icon>
+    <span *ngIf="isExpanded">Home</span>
+  </mat-list-item>
+
+  <mat-list-item [routerLink]="'users'">
+    <mat-icon mat-list-icon>important_devices</mat-icon>
+    <span *ngIf="isExpanded">Usuarios</span>
+  </mat-list-item>
+
+  <mat-list-item [routerLink]="'contacts'">
+    <mat-icon mat-list-icon>supervisor_account</mat-icon>
+    <span *ngIf="isExpanded">Contactos</span>
+  </mat-list-item>
+
+  <mat-list-item [routerLink]="'mutuals'">
+    <mat-icon mat-list-icon>thumbs_up_down</mat-icon>
+    <span *ngIf="isExpanded">Mutual Contacts Match</span>
+  </mat-list-item>
+</mat-nav-list>

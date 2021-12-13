@@ -1,0 +1,13 @@
+<mat-sidenav-container autosize>
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+
+  <div class="content">
+    <mat-toolbar>
+      <app-header></app-header>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+    <!-- <app-table></app-table> -->
+  </div>
+</mat-sidenav-container>
