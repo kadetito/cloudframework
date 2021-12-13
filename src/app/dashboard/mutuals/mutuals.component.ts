@@ -11,6 +11,7 @@ import { ContactsService } from '../../services/contacts.service';
 })
 export class MutualsComponent implements OnInit {
   allUsers: User[] = [];
+  matches: User[] = [];
   matchForm!: FormGroup;
   formSubmitted: boolean = false;
   constructor(
@@ -39,6 +40,8 @@ export class MutualsComponent implements OnInit {
     this.contactService
       .searchMatchServ(this.matchForm.value)
       .subscribe((resp: any) => {
+        this.matches = resp;
+        console.log('losmatches', this.matches);
         //this.ngOnInit();
       });
   }
