@@ -45,6 +45,16 @@ export class ContactsService {
       );
   }
 
+  searchMatchServ(data: any) {
+    return this.http
+      .post<any>(`http://www.rafapenya.com/cloud/api/search_match.php`, data)
+      .pipe(
+        map((data) => {
+          return data;
+        })
+      );
+  }
+
   postEdit(contact: Contacts) {
     return this.http
       .post<Contacts>(

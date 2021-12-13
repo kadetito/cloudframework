@@ -5,4 +5,6 @@ export class Contacts {
   email?: string;
   telefono?: string;
   address?: string;
+  id_usuario?: string;
+  id_contacto?: string;
 }

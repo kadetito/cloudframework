@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../models/user';
 
@@ -21,14 +29,21 @@ export class EditUsuarioComponent implements OnInit {
   @Input() iden: any;
   users: any;
   contactusers: Contacts[] = [];
+  contactusersNo: Contacts[] = [];
   editUserForm!: FormGroup;
+  addContactsForm!: FormGroup;
+  deleteContactsForm!: FormGroup;
   formSubmitted: boolean = false;
-
+  public itemID: any[] = [];
   constructor(
     private router: Router,
     private userService: UsersService,
     private fb: FormBuilder
   ) {}
+
+  // ngOnChanges(changes: SimpleChanges): void {
+
+  // }
 
   ngOnInit(): void {
     this.userService.getUsersByID(this.iden).subscribe((respuesta: any) => {
@@ -44,11 +59,25 @@ export class EditUsuarioComponent implements OnInit {
         password: new FormControl(this.users.password, Validators.required),
         role: new FormControl(''),
       });
+
+      this.addContactsForm = new FormGroup({
+        id_contacto: new FormControl('', Validators.required),
+        id_usuario: new FormControl(this.users.id, Validators.required),
+      });
     });
 
+    //contactos de este user
     this.userService.getContactsByID(this.iden).subscribe((resp: any) => {
       this.contactusers = resp;
     });
+
+    // recogemos los contactos generales que NO tiene este user
+    // para poder añadirlos
+    this.userService
+      .getContactsByIDDontHave(this.iden)
+      .subscribe((resp: any) => {
+        this.contactusersNo = resp;
+      });
   }
 
   onSubmit() {
@@ -69,6 +98,28 @@ export class EditUsuarioComponent implements OnInit {
           });
           this.userService.closer.emit({ closer: 'close' });
         });
+      });
+  }
+
+  addContact() {
+    console.log(this.addContactsForm.value);
+    this.formSubmitted = true;
+    if (this.addContactsForm.invalid) {
+      return;
+    }
+
+    this.userService
+      .postAddContact(this.addContactsForm.value)
+      .subscribe((resp: any) => {
+        this.ngOnInit();
+      });
+  }
+
+  deleteContact(id_usuario: any, id_contacto: any) {
+    this.userService
+      .postDeleteContact({ id_usuario, id_contacto })
+      .subscribe((resp: any) => {
+        this.ngOnInit();
       });
   }
 }

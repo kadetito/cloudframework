@@ -31,6 +31,16 @@ export class UsersService {
       );
   }
 
+  postAddContact(data: any) {
+    return this.http
+      .post<any>(`http://www.rafapenya.com/cloud/api/add_contacto.php`, data)
+      .pipe(
+        map((addc) => {
+          return addc;
+        })
+      );
+  }
+
   getUsersByID(id: number) {
     return this.http
       .get<User>(`http://www.rafapenya.com/cloud/api/persona_byid.php?id=` + id)
@@ -63,11 +73,29 @@ export class UsersService {
       );
   }
 
-  delete(id: string) {
-    return this.http.delete<User>(`api/users/` + id).pipe(
-      map((user) => {
-        return user;
-      })
-    );
+  getContactsByIDDontHave(id: number) {
+    return this.http
+      .get<User>(
+        `http://www.rafapenya.com/cloud/api/contacts_byiddonthave.php?id=` + id
+      )
+      .pipe(
+        map((contactsuser) => {
+          return contactsuser;
+        })
+      );
+  }
+
+  postDeleteContact(objeto: any) {
+    console.log(objeto);
+    return this.http
+      .post<any>(
+        `http://www.rafapenya.com/cloud/api/delete_contact.php`,
+        objeto
+      )
+      .pipe(
+        map((delc) => {
+          return delc;
+        })
+      );
   }
 }

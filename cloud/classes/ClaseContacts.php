@@ -183,8 +183,21 @@ class ClaseContacts {
         return [ $registros ];
     }
 
+    public static function consultaListadoContactosDontHave($id_usuario){
+        $conexion = new conexion();
+        $conexion->exec("SET NAMES 'utf8'");
+        $consulta = $conexion->prepare("
+                    SELECT *
+                    FROM " . self::TABLA . " a 
+                    ");
+        //$consulta->bindParam(':id_usuario', $id_usuario);
+        $consulta->execute();
+        $registros = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        $total = $conexion->query("SELECT FOUND_ROWS() as total")->fetch()['total'];
+        return [ $registros ];
+    }
 
-
+    
 
     
 }

@@ -7,16 +7,51 @@
           Seleccione los usuarios para buscar todos los contactos comunes
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <label for="userone">Usuario A</label>
-          <input type="text" class="form-control" name="userone" />
+
+      <form
+        [formGroup]="matchForm"
+        (ngSubmit)="searchMatch()"
+        autocomplete="off"
+        novalidate
+        *ngIf="matchForm"
+      >
+        <div class="row">
+          <div class="col-md-6">
+            <label for="addcontacto">Añadir contacto</label>
+            <div class="input-group">
+              <select class="form-control" formControlName="userA">
+                <option value="">Seleccione un contacto para añadir</option>
+                <option *ngFor="let itemNo of allUsers" [value]="itemNo.id">
+                  {{ itemNo.firstname }} {{ itemNo.lastname }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="addcontacto">Añadir contacto</label>
+            <div class="input-group">
+              <select class="form-control" formControlName="userB">
+                <option value="">Seleccione un contacto para añadir</option>
+                <option *ngFor="let itemNo of allUsers" [value]="itemNo.id">
+                  {{ itemNo.firstname }} {{ itemNo.lastname }}
+                </option>
+              </select>
+            </div>
+          </div>
         </div>
-        <div class="col-md-6">
-          <label for="usertwo">Usuario B</label>
-          <input type="text" class="form-control" name="usertwo" />
+        <div class="row mt-5">
+          <div class="col-md-12 text-center">
+            <button
+              [disabled]="!matchForm.valid"
+              type="submit"
+              class="btn btn-primary"
+              name="send"
+            >
+              Search Match
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
